@@ -9,7 +9,7 @@ type Answers=Record<string,string>;
 type SavedState={step:number;answers:Answers;firstName:string;phone:string;countryCode:string;unlockedValue:number;quizCompleted:boolean;leadSubmitted:boolean;utms:Record<string,string>};
 const initial:SavedState={step:0,answers:{},firstName:'',phone:'',countryCode:'+52',unlockedValue:0,quizCompleted:false,leadSubmitted:false,utms:{}};
 const countries=[['México','+52'],['Colombia','+57'],['Argentina','+54'],['Chile','+56'],['Perú','+51'],['Ecuador','+593'],['Bolivia','+591'],['Paraguay','+595'],['Uruguay','+598'],['Guatemala','+502'],['Costa Rica','+506'],['Panamá','+507'],['Rep. Dominicana','+1'],['El Salvador','+503'],['Honduras','+504'],['Nicaragua','+505']];
-const storageKey='mercedes-bows-funnel-v1';
+const storageKey='mercedes-bows-funnel-v2';
 const sequence=['intro','q1','q2','q3','lead','q4','product','q5','expert','q6','celebration','rewards','offer'] as const;
 const questionNumber=(stage:string)=>({q1:1,q2:2,q3:3,q4:4,q5:5,q6:6}[stage]||0);
 

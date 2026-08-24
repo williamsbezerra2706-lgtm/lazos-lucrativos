@@ -29,7 +29,7 @@ A soma dos benefícios é validada automaticamente contra `fullPrice - finalPric
 
 ## Progresso e reset
 
-O estado e as UTMs ficam no `localStorage` sob a chave `mercedes-bows-funnel-v1`. Em desenvolvimento aparece o botão **Reset Quiz**. Em produção ele não é renderizado.
+O estado e as UTMs ficam no `localStorage` sob a chave `mercedes-bows-funnel-v2`. Em desenvolvimento aparece o botão **Reset Quiz**. Em produção ele não é renderizado.
 
 ## Publicar no Vercel
 
