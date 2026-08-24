@@ -1,0 +1,25 @@
+.visual-placeholder.real-image {
+  position: relative;
+  overflow: hidden;
+  background: #f4eadc;
+}
+
+.visual-placeholder.real-image img {
+  object-fit: cover;
+}
+
+.visual-placeholder.expert.real-image .message-image {
+  display: none;
+}
+
+.info-screen .visual-placeholder.expert.real-image .entry-image {
+  display: none;
+}
+
+.info-screen .visual-placeholder.expert.real-image .message-image {
+  display: block;
+}
+
+.visual-placeholder.app.real-image img {
+  object-fit: contain;
+}

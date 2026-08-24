@@ -4,7 +4,12 @@ export const funnelConfig = {
   checkoutUrl: '#', vslEnabled: false, offerTimerEnabled: false,
   rewardDurationMs: 1050,
   increments: { q1: 20, q2: 20, q3: 20, lead: 20, q4: 20, q5: 15, q6: 15 },
-  images: { bowKit: '/images/bow-kit-placeholder.jpg', appMockup: '/images/app-mockup-placeholder.png' },
+  images: {
+    expertEntry: '/images/mercedes-entry.png',
+    expertMessage: '/images/mercedes-message.png',
+    bowKit: '/images/bow-kit-placeholder.jpg',
+    appMockup: '/images/app-preview.png',
+  },
   analytics: { metaPixelId: '', ga4Id: '' },
   offerItems: ['Método completo paso a paso','Acceso al aplicativo','Guías de materiales y herramientas','Modelos de lazos para principiantes','Moldes y medidas','Guía de precios','Fotos y catálogo','Cómo publicar en redes sociales','Cómo utilizar WhatsApp para mostrar tus productos','Cómo dar tus primeros pasos para ofrecer tus lazos'],
   bonuses: [

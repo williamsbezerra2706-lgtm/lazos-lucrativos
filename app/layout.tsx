@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Nunito_Sans } from 'next/font/google';
 import './globals.css';
 import './typography.css';
+import './images.css';
 
 const nunitoSans = Nunito_Sans({
   variable: '--font-nunito-sans',

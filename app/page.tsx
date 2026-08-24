@@ -1,6 +1,7 @@
 'use client';
 /* eslint-disable react-hooks/set-state-in-effect, react-hooks/exhaustive-deps */
 import { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
+import Image from 'next/image';
 import { configuredRewardTotal, funnelConfig, maxUnlockedBenefit } from '../config/funnel';
 import { questions, type Question } from '../data/questions';
 
@@ -14,7 +15,7 @@ const questionNumber=(stage:string)=>({q1:1,q2:2,q3:3,q4:4,q5:5,q6:6}[stage]||0)
 
 function track(event:string,data:Record<string,string|number>={}){ if(typeof window==='undefined')return; window.dispatchEvent(new CustomEvent('funnel_event',{detail:{event,...data}})); if(process.env.NODE_ENV==='development')console.info('[analytics]',event,data); }
 function money(value:number){return `${funnelConfig.currency}${value}`}
-function VisualPlaceholder({kind,label}:{kind:'expert'|'bows'|'app';label:string}){return <div className={`visual-placeholder ${kind}`} role="img" aria-label={label}><div className="visual-icon">{kind==='expert'?'M':kind==='bows'?'🎀':'▣'}</div><span>{label}</span></div>}
+function VisualPlaceholder({kind,label}:{kind:'expert'|'bows'|'app';label:string}){if(kind==='bows')return <div className="visual-placeholder bows" role="img" aria-label={label}><div className="visual-icon">🎀</div><span>{label}</span></div>;if(kind==='app')return <div className="visual-placeholder app real-image"><Image src={funnelConfig.images.appMockup} alt={label} fill sizes="150px" /></div>;return <div className="visual-placeholder expert real-image"><Image className="entry-image" src={funnelConfig.images.expertEntry} alt={label} fill sizes="(max-width: 520px) 82vw, 310px" priority/><Image className="message-image" src={funnelConfig.images.expertMessage} alt={label} fill sizes="(max-width: 520px) 82vw, 310px" /></div>}
 function ProgressBar({value}:{value:number}){return <div className="progress-track" aria-label={`Progreso ${value}%`}><div className="progress-fill" style={{width:`${value}%`}} /></div>}
 function AnimatedMoneyCounter({value,pulse}:{value:number;pulse:boolean}){const [shown,setShown]=useState(value);const previous=useRef(value);useEffect(()=>{const from=previous.current,start=performance.now(),duration=480;let frame=0;const run=(now:number)=>{const p=Math.min(1,(now-start)/duration);setShown(Math.round(from+(value-from)*(1-Math.pow(1-p,3))));if(p<1)frame=requestAnimationFrame(run);else previous.current=value};frame=requestAnimationFrame(run);return()=>cancelAnimationFrame(frame)},[value]);return <strong className={pulse?'money pulse':'money'}>{money(shown)}</strong>}
 function QuizHeader({value,stage,pulse}:{value:number;stage:string;pulse:boolean}){const n=questionNumber(stage);const progress=Math.min(100,Math.round((value/maxUnlockedBenefit)*100));return <header className="reward-header"><div><span>Ya desbloqueaste</span><AnimatedMoneyCounter value={value} pulse={pulse}/></div><div className="surprise">🎁 Premio sorpresa</div><p>{n?`PREGUNTA ${n} DE 6`:'TU PROGRESO'}</p><ProgressBar value={progress}/><small>No es dinero en efectivo. Es un beneficio especial.</small></header>}
