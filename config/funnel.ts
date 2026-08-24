@@ -7,7 +7,7 @@ export const funnelConfig = {
   images: {
     expertEntry: '/images/mercedes-entry.png',
     expertMessage: '/images/mercedes-message.png',
-    bowKit: '/images/bow-kit-placeholder.jpg',
+    bowKit: '/images/mercedes-message.png',
     appMockup: '/images/app-preview.png',
   },
   analytics: { metaPixelId: '', ga4Id: '' },
