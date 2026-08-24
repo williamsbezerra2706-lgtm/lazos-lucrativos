@@ -1,0 +1,76 @@
+/* Typography-only layer: intentionally does not change layout or component styling. */
+body,
+button,
+input,
+select {
+  font-family: var(--font-nunito-sans), "Nunito Sans", "Nunito", Arial, sans-serif;
+}
+
+body {
+  font-weight: 400;
+}
+
+h1,
+h2,
+.question-screen h1,
+.lead-screen h1,
+.info-screen h1,
+.final-unlock h1,
+.rewards-screen h1,
+.offer-screen h1,
+.offer-screen h2 {
+  font-family: inherit;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+}
+
+.question-screen h1 {
+  font-weight: 700;
+}
+
+.answer-card {
+  font-weight: 600;
+}
+
+.lead,
+.helper,
+.microcopy,
+.reward-hint,
+.reward-header span,
+.reward-header small,
+.mini-reward span,
+.mini-reward small,
+.total-card small,
+.honest-note,
+.app-feature li span,
+.consent {
+  font-weight: 500;
+  color: #685f56;
+}
+
+.primary-button,
+.eyebrow,
+.tag,
+.surprise,
+.lead-screen label,
+.bonus-card b {
+  font-weight: 800;
+}
+
+.money,
+.reward-header strong,
+.mini-reward strong,
+.final-unlock > strong,
+.total-card strong,
+.price-card strong,
+.price-card > strong,
+.price-card b,
+.bonus-card strong {
+  font-family: inherit;
+  font-weight: 800;
+}
+
+.visual-icon {
+  font-family: inherit;
+  font-weight: 800;
+}

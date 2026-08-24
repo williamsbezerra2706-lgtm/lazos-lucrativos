@@ -1,5 +1,13 @@
 import type { Metadata } from 'next';
+import { Nunito_Sans } from 'next/font/google';
 import './globals.css';
+import './typography.css';
+
+const nunitoSans = Nunito_Sans({
+  variable: '--font-nunito-sans',
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+});
 
 export const metadata: Metadata = {
   title: 'Lazos con Mercedes',
@@ -14,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body>{children}</body>
+      <body className={nunitoSans.variable}>{children}</body>
     </html>
   );
 }
