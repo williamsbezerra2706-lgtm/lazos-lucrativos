@@ -4,6 +4,7 @@ import Script from 'next/script';
 import './globals.css';
 import './typography.css';
 import './images.css';
+import { funnelConfig } from '../config/funnel';
 
 const nunitoSans = Nunito_Sans({
   variable: '--font-nunito-sans',
@@ -25,6 +26,16 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={nunitoSans.variable}>
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${funnelConfig.analytics.ga4Id}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${funnelConfig.analytics.ga4Id}', { send_page_view: false });`}
+        </Script>
         <Script id="meta-pixel" strategy="afterInteractive">
           {`!function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?

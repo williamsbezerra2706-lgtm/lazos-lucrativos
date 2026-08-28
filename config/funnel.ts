@@ -12,7 +12,7 @@ export const funnelConfig = {
     bowKit: '/images/mercedes-message.png',
     appMockup: '/images/app-preview.png',
   },
-  analytics: { metaPixelId: '', ga4Id: '' },
+  analytics: { metaPixelId: '1939958330006245', ga4Id: 'G-B60TEQ109Y' },
   offerItems: ['Método completo paso a paso','Acceso al aplicativo','Guías de materiales y herramientas','Modelos de lazos para principiantes','Moldes y medidas','Guía de precios','Fotos y catálogo','Cómo publicar en redes sociales','Cómo utilizar WhatsApp para mostrar tus productos','Cómo dar tus primeros pasos para ofrecer tus lazos'],
   bonuses: [
     { title:'Guía de primeros lazos', value:20 },{ title:'Moldes y medidas listas para usar', value:25 },
