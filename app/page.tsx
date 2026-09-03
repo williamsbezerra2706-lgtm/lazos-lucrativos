@@ -8,7 +8,8 @@ import { questions, type Question } from '../data/questions';
 type Answers=Record<string,string>;
 type SavedState={step:number;answers:Answers;firstName:string;phone:string;countryCode:string;unlockedValue:number;quizCompleted:boolean;leadSubmitted:boolean;utms:Record<string,string>};
 const initial:SavedState={step:0,answers:{},firstName:'',phone:'',countryCode:'+52',unlockedValue:0,quizCompleted:false,leadSubmitted:false,utms:{}};
-const countries=[['México','+52'],['Colombia','+57'],['Argentina','+54'],['Chile','+56'],['Perú','+51'],['Ecuador','+593'],['Bolivia','+591'],['Paraguay','+595'],['Uruguay','+598'],['Guatemala','+502'],['Costa Rica','+506'],['Panamá','+507'],['Rep. Dominicana','+1'],['El Salvador','+503'],['Honduras','+504'],['Nicaragua','+505']];
+const countries=[['México','+52','MX'],['Colombia','+57','CO'],['Argentina','+54','AR'],['Chile','+56','CL'],['Perú','+51','PE'],['Ecuador','+593','EC'],['Bolivia','+591','BO'],['Paraguay','+595','PY'],['Uruguay','+598','UY'],['Guatemala','+502','GT'],['Costa Rica','+506','CR'],['Panamá','+507','PA'],['Rep. Dominicana','+1','DO'],['Puerto Rico','+1','PR'],['El Salvador','+503','SV'],['Honduras','+504','HN'],['Nicaragua','+505','NI'],['Venezuela','+58','VE'],['Brasil','+55','BR']];
+const dialCodeForCountry=(countryCode:string)=>countries.find(([,dial,iso])=>iso===countryCode)?.[1]||'+52';
 const storageKey='mercedes-bows-funnel-v2';
 const sequence=['intro','q1','q2','q3','lead','q4','product','q5','expert','q6','celebration','rewards','offer'] as const;
 const questionNumber=(stage:string)=>({q1:1,q2:2,q3:3,q4:4,q5:5,q6:6}[stage]||0);
@@ -35,7 +36,7 @@ function OfferCard({name,utms}:{name:string;utms:Record<string,string>}){
 export default function Home(){
   const [state,setState]=useState<SavedState>(initial),[ready,setReady]=useState(false),[busy,setBusy]=useState(false),[toast,setToast]=useState<{amount:number;final:boolean}|null>(null),[pulse,setPulse]=useState(false);
   const stage=sequence[state.step]||'intro'; const question=questions.find(q=>q.id===stage); const progressState=useMemo(()=>state,[state]);
-  useEffect(()=>{const params=new URLSearchParams(location.search),utms:Record<string,string>={};['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid'].forEach(k=>{const v=params.get(k);if(v)utms[k]=v});try{const saved=localStorage.getItem(storageKey);if(saved)setState({...initial,...JSON.parse(saved),utms:{...JSON.parse(saved).utms,...utms}});else setState(s=>({...s,utms}))}catch{}setReady(true);track('page_view')},[]);
+  useEffect(()=>{const params=new URLSearchParams(location.search),utms:Record<string,string>={};['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid'].forEach(k=>{const v=params.get(k);if(v)utms[k]=v});const detectedDial=dialCodeForCountry(document.body.dataset.visitorCountry||'');try{const saved=localStorage.getItem(storageKey);if(saved){const parsed={...initial,...JSON.parse(saved)};setState({...parsed,countryCode:parsed.leadSubmitted?parsed.countryCode:detectedDial,utms:{...parsed.utms,...utms}})}else setState(s=>({...s,countryCode:detectedDial,utms}))}catch{setState(s=>({...s,countryCode:detectedDial,utms}))}setReady(true);track('page_view')},[]);
   useEffect(()=>{if(ready)localStorage.setItem(storageKey,JSON.stringify(state))},[state,ready]);
   function resetQuiz(){localStorage.removeItem(storageKey);setState(initial);setToast(null);setBusy(false)}
   function advance(){setState(s=>({...s,step:s.step+1}))}

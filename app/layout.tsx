@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Nunito_Sans } from 'next/font/google';
 import Script from 'next/script';
+import { headers } from 'next/headers';
 import './globals.css';
 import './typography.css';
 import './images.css';
@@ -18,14 +19,19 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const requestHeaders = await headers();
+  const acceptLanguage = requestHeaders.get('accept-language') || '';
+  const languageCountry = acceptLanguage.match(/[-_]([A-Z]{2})\b/i)?.[1];
+  const visitorCountry = (requestHeaders.get('x-vercel-ip-country') || languageCountry || '').toUpperCase();
+
   return (
     <html lang="es">
-      <body className={nunitoSans.variable}>
+      <body className={nunitoSans.variable} data-visitor-country={visitorCountry}>
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${funnelConfig.analytics.ga4Id}`}
           strategy="afterInteractive"
