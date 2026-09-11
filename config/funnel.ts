@@ -2,8 +2,8 @@ export const funnelConfig = {
   expert: { name: 'Mercedes', image: '/images/mercedes-placeholder.jpg', alt: 'Mercedes, especialista en lazos artesanales' },
   currency: 'US$', fullPrice: 147, finalPrice: 17,
   checkoutUrl: 'https://pay.hotmart.com/F107343958P?off=80vtw7st&checkoutMode=10' as string, vslEnabled: false, offerTimerEnabled: false,
-  exitOfferPrice: 15.90,
-  exitOfferCheckoutUrl: 'https://pay.hotmart.com/F107343958P?off=ii9p83wb&checkoutMode=10' as string,
+  exitOfferPrice: 9.90,
+  exitOfferCheckoutUrl: 'https://pay.hotmart.com/F107343958P?off=o2up3cvv&checkoutMode=10' as string,
   rewardDurationMs: 1050,
   increments: { q1: 20, q2: 20, q3: 20, lead: 20, q4: 20, q5: 15, q6: 15 },
   images: {
